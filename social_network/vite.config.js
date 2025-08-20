@@ -10,9 +10,13 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
+  base:"/Social-Network-Prediction/",
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
+  build:{
+    outDir:"docs"
+  }
 })
