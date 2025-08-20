@@ -1,5 +1,6 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request,send_from_directory
 from flask_cors import CORS  # 允许跨域请求
+import os
 import math
 import json
 import networkx as nx
@@ -7,6 +8,21 @@ import networkx as nx
 # 创建 Flask 应用
 app = Flask(__name__)
 CORS(app)  # 启用跨域支持
+
+# --------------------------
+# 前端部署部分
+# --------------------------
+# static_folder 指向 Vue build 出来的 dist 文件夹
+app = Flask(__name__, static_folder="../dist", static_url_path="/")
+
+@app.route("/")
+def index():
+    return send_from_directory(app.static_folder, "index.html")
+# 如果前端是单页应用（SPA），处理路由刷新问题
+@app.errorhandler(404)
+def not_found(e):
+    return send_from_directory(app.static_folder, "index.html")
+
 
 global json_data  # 全局变量存储 JSON 数据
 json_data = None
@@ -291,5 +307,6 @@ def upload_json():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
 
