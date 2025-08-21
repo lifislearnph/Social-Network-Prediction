@@ -126,7 +126,7 @@ export default {
       formData.append('file', this.selectedFile)
 
       try {
-        const response = await axios.post('http://localhost:5000/api/upload-json', formData, {
+        const response = await axios.post('https://social-network-predictation-backend.onrender.com/api/upload-json', formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
           onUploadProgress: (progressEvent) => {
             this.uploadProgress = Math.round((progressEvent.loaded * 100) / progressEvent.total)
