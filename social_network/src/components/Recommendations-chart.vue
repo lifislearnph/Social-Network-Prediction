@@ -54,7 +54,7 @@ export default {
       this.errorMessage = null
       this.recommendations = []
       try {
-        const res = await fetch(`http://localhost:5000/api/recommend/${this.selectedUserId}`)
+        const res = await fetch(`https://social-network-predictation-backend.onrender.com/api/recommend/${this.selectedUserId}`)
         if (!res.ok) {
           throw new Error('网络错误或用户 ID 不存在')
         }

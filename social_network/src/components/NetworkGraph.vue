@@ -18,7 +18,7 @@ export default {
   async mounted() {
     try {
       // 1. 异步加载数据
-      const res = await fetch('http://localhost:5000/api/initdata')
+      const res = await fetch('https://social-network-predictation-backend.onrender.com/api/initdata')
       if (!res.ok) throw new Error('数据加载失败')
 
       const rawData = await res.json()
@@ -108,7 +108,7 @@ export default {
         console.log('点击的节点信息:', params.data)
         const nodeId = params.data.id
         //到后端查询节点具体信息
-        const response = await axios.post('http://localhost:5000/api/handle-node-info', { nodeId })
+        const response = await axios.post('https://social-network-predictation-backend.onrender.com/api/handle-node-info', { nodeId })
 
         return this.$emit('node-click', response.data)
       }
